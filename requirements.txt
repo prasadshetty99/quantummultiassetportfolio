@@ -1,0 +1,53 @@
+# Quantum Computing
+qiskit==0.43.0
+qiskit-aer==0.12.0
+qiskit-ibmq-provider==0.20.2
+qiskit-optimization==0.6.0
+qiskit-machine-learning==0.6.1
+
+# Classical Optimization & Linear Programming
+scipy==1.11.3
+numpy==1.24.3
+pandas==2.0.3
+cvxpy==1.3.2
+scikit-optimize==0.9.1
+
+# Financial Data & Analytics
+yfinance==0.2.32
+pandas-datareader==0.10.0
+alpha-vantage==2.3.1
+polygon-api-client==1.12.0
+statsmodels==0.14.0
+scikit-learn==1.3.1
+
+# Visualization
+matplotlib==3.8.0
+seaborn==0.13.0
+plotly==5.17.0
+kaleido==0.2.1
+
+# Utilities
+python-dotenv==1.0.0
+pyyaml==6.0.1
+loguru==0.7.2
+
+# Testing
+pytest==7.4.2
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+
+# Jupyter Notebooks
+jupyter==1.0.0
+jupyterlab==4.0.7
+ipython==8.16.0
+notebook==7.0.4
+
+# Development
+black==23.11.0
+flake8==6.1.0
+pylint==3.0.2
+mypy==1.6.1
+
+# Documentation
+sphinx==7.2.6
+sphinx-rtd-theme==1.3.0

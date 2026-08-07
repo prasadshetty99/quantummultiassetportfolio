@@ -1,0 +1,102 @@
+# Default Configuration for Quantum Multi-Asset Portfolio Optimization
+
+# Data Configuration
+data:
+  source: "yfinance"  # Options: yfinance, alpha_vantage, polygon
+  frequency: "daily"  # Options: daily, weekly, monthly
+  lookback_period: 5  # Years of historical data
+  update_interval: 3600  # Seconds
+
+# Asset Configuration
+assets:
+  equity_indices:
+    - "SPY"   # S&P 500
+    - "QQQ"   # NASDAQ 100
+    - "IWM"   # Russell 2000
+    - "VEA"   # Emerging Markets
+  
+  bonds:
+    - "AGG"   # Aggregate Bond
+    - "LQD"   # Corporate Bonds
+    - "TLT"   # Long-term Treasury
+  
+  real_estate:
+    - "VNQ"   # Real Estate ETF
+    - "XLRE"  # Real Estate Sector
+  
+  commodities:
+    - "GLD"   # Gold
+    - "DBC"   # Commodities Index
+    - "USO"   # Oil
+
+# Portfolio Constraints
+portfolio:
+  min_allocation: 0.02  # Minimum 2% per asset
+  max_allocation: 0.25  # Maximum 25% per asset
+  target_return: 0.08   # Target annual return (8%)
+  max_volatility: 0.15  # Maximum volatility (15%)
+  
+  # Rebalancing
+  rebalance_frequency: "quarterly"
+  rebalance_threshold: 0.05  # 5% drift before rebalancing
+
+# Optimization Methods
+optimization:
+  classical:
+    method: "markowitz"  # Options: markowitz, mad, cvar, black_litterman
+    solver: "cvxpy"      # Options: cvxpy, scipy
+  
+  quantum:
+    backend: "qasm_simulator"  # Options: qasm_simulator, statevector_simulator, real_device
+    algorithm: "qaoa"          # Options: qaoa, vqe, hhl
+    shots: 1024
+    optimization_level: 3
+    seed: 42
+
+# QAOA Configuration
+qaoa:
+  p: 3                    # Depth of QAOA circuit
+  initial_state: "uniform"
+  optimizer: "COBYLA"
+  max_iterations: 1000
+
+# VQE Configuration
+vqe:
+  ansatz: "RealAmplitudes"
+  optimizer: "SLSQP"
+  max_iterations: 1000
+  shots: 1024
+
+# Risk Analysis
+risk:
+  confidence_level: 0.95  # 95% VaR/CVaR
+  lookback_days: 252     # 1 year of trading days
+  use_ewma: true         # Exponentially weighted moving average
+  ewma_span: 30          # Days for EWMA calculation
+
+# Backtesting
+backtest:
+  start_date: "2020-01-01"
+  end_date: "2024-01-01"
+  initial_capital: 100000  # USD
+  transaction_cost: 0.001  # 0.1% per trade
+  slippage: 0.0005        # 0.05% slippage
+  rebalance_dates: "quarterly"
+
+# Logging & Output
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: "logs/portfolio.log"
+  console: true
+
+output:
+  format: "csv"   # Options: csv, json, parquet
+  save_path: "results/"
+  plots: true
+  export_allocation: true
+
+# API Keys (use environment variables in production)
+api_keys:
+  alpha_vantage: "${ALPHA_VANTAGE_KEY}"
+  polygon: "${POLYGON_API_KEY}"
+  ibm_quantum: "${IBM_QUANTUM_TOKEN}"

@@ -1,0 +1,119 @@
+# Quantum-Specific Configuration
+
+quantum_backend:
+  provider: "qiskit"  # Options: qiskit, cirq, pyquil
+  device_type: "simulator"  # Options: simulator, real_device, cloud
+  
+  simulator:
+    type: "qasm"  # Options: qasm, statevector, unitary
+    seed: 42
+    shots: 1024
+    max_qubits: 20
+  
+  real_device:
+    provider: "ibmq"
+    hub: "ibm-q"
+    group: "open"
+    project: "main"
+
+# QAOA Settings
+qaoa_settings:
+  circuit_type: "standard"  # Options: standard, weighted, parameterized
+  p_values: [1, 2, 3, 4, 5]  # Depth values to test
+  
+  # Mixer Hamiltonian
+  mixer:
+    type: "X"  # Options: X, XY, Ising
+    rotation: "linear"
+  
+  # Cost Hamiltonian
+  cost:
+    type: "portfolio_qaoa"
+    encoding: "qubo"
+    scaling: "normalized"  # Options: normalized, logarithmic
+  
+  # Optimization
+  optimizer:
+    name: "COBYLA"
+    max_iterations: 1000
+    tolerance: 1e-6
+    lr: 0.01
+
+# VQE Settings
+vqe_settings:
+  ansatz_type: "RealAmplitudes"  # Options: RealAmplitudes, TwoLocal, EfficientSU2
+  entanglement: "linear"  # Options: linear, circular, full
+  reps: 3  # Number of repetitions
+  
+  # VQE Optimizer
+  optimizer:
+    name: "SLSQP"
+    max_iterations: 500
+    tolerance: 1e-6
+  
+  # Estimator
+  estimator:
+    type: "sampler_based"
+    shots: 1024
+    skip_qobj_validation: true
+
+# HHL Settings
+hhl_settings:
+  condition_number_estimation: true
+  eigenvalue_threshold: 0.01
+  
+  # Phase Estimation
+  phase_estimation:
+    precision_bits: 5
+    scaling_factor: 1.0
+
+# Error Mitigation
+error_mitigation:
+  enabled: true
+  method: "zero_noise_extrapolation"  # Options: zne, pec, dd
+  levels: [1, 2, 3]
+  
+  # Dynamical Decoupling
+  dynamical_decoupling:
+    enabled: false
+    sequence_type: "XXYY"
+
+# Noise Model
+noise_model:
+  enabled: false
+  type: "ibm_qx5"
+  readout_error: 0.01
+  single_qubit_error: 0.001
+  two_qubit_error: 0.01
+
+# Hybrid Classical-Quantum
+hybrid:
+  quantum_weight: 0.5  # Weight given to quantum results (0-1)
+  ensemble_method: "weighted_average"  # Options: weighted_average, voting, stacking
+  
+  # Classical fallback
+  fallback:
+    enabled: true
+    method: "scipy"  # Fallback to classical optimizer if quantum fails
+    timeout: 30  # Seconds
+
+# Circuit Optimization
+circuit_optimization:
+  level: 3  # 0: no optimization, 3: maximum
+  gates_to_preserve: []  # List of gate types to preserve
+  basis_gates: ["u", "cx"]
+  remove_final_measurements: false
+
+# Logging & Debugging
+debug:
+  verbose: false
+  save_circuits: false
+  plot_circuits: false
+  save_transpiled: false
+  profile_execution: false
+  
+  # Visualization
+  visualization:
+    plot_histogram: true
+    plot_state_city: false
+    plot_bloch_sphere: false
