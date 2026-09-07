@@ -1,17 +1,18 @@
-"""Quantum Multi-Asset Portfolio Optimization Framework"""
+"""
+Quantum Multi-Asset Portfolio Optimization Framework
+
+A hybrid quantum-classical optimization framework for multi-asset portfolio construction
+that leverages quantum algorithms (QAOA, VQE, HHL) and classical optimization techniques
+(MAD/CVaR, Linear Programming) to solve complex portfolio allocation problems.
+"""
 
 __version__ = "0.1.0"
 __author__ = "Prasad Shetty"
-__email__ = "prasadshetty99@gmail.com"
 
-from src.data_pipeline import DataPipeline
-from src.portfolio import Portfolio
-from src.quantum_optimizer import QuantumPortfolioOptimizer
-from src.classical_optimizer import ClassicalOptimizer
+from . import core
+from . import quantum
+from . import classical
+from . import data
+from . import utils
 
-__all__ = [
-    "DataPipeline",
-    "Portfolio",
-    "QuantumPortfolioOptimizer",
-    "ClassicalOptimizer",
-]
+__all__ = ["core", "quantum", "classical", "data", "utils"]
